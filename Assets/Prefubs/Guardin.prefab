@@ -2413,11 +2413,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16b87a28c649c6e46a396ecfbb61dee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  route: []
-  routeAngle: 
   growZone: {fileID: 637880384669300644, guid: 9d42c0c12e90bce4e9f6f94c79fb2c64, type: 3}
-  maxCast: 240
+  maxCast: 120
 --- !u!1 &3421077930537260934
 GameObject:
   m_ObjectHideFlags: 0

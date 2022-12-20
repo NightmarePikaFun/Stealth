@@ -69,23 +69,23 @@ public class Observer : MonoBehaviour
         {
             if (enemys[i] == gameObject)
             {
-                Debug.Log("off");
                 canSee[i] = false;
                 break;
             }
         }
     }
 
-    public void AddHearPower(GameObject gameObject, float power)
+    public void AddHearPower(GameObject gameObject, float power, Vector3 castPosition)
     {
         for (int i = 0; i < enemys.Length; i++)
         {
             if (enemys[i] == gameObject)
             {
                 listen[i] += power;
+                Debug.Log("Listen :"+listen[i]);
                 if(listen[i]>=maxListenPower)
                 {
-                    //Instantiate wisp
+                    SpawnGhostListen(castPosition);
                 }
                 break;
             }

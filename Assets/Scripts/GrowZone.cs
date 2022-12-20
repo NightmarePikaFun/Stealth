@@ -35,4 +35,19 @@ public class GrowZone : MonoBehaviour
     {
         growSpeed = _speed;
     }
+
+    public void SetMaxRange(float range)
+    {
+        maxScale = range;
+    }
+
+    public float GetMaxScale()
+    {
+        return maxScale;
+    }
+
+    public float GetGrowSpeed()
+    {
+        return growSpeed;
+    }
 }

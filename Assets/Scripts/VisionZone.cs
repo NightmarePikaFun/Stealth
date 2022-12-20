@@ -17,11 +17,15 @@ public class VisionZone : MonoBehaviour
         
     }
 
-
-    public void SetParent(GameObject gameObject)
+    /// <summary>
+    /// Присвоение родителей
+    /// </summary>
+    /// <param name="gameObject">Родительский объект</param>
+    /// <param name="eye">Объект слежения (Глаза)</param>
+    public void SetParent(GameObject gameObject, GameObject eye)
     {
-        _parent = gameObject;
-        //transform.SetParent(gameObject.transform);
+        _parent = eye;
+        transform.SetParent(gameObject.transform);
     }
 
     private void OnTriggerEnter(Collider other)

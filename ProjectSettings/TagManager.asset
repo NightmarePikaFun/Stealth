@@ -7,6 +7,7 @@ TagManager:
   - Node
   - observer
   - Enemy
+  - Null
   layers:
   - Default
   - TransparentFX

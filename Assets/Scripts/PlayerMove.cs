@@ -10,8 +10,16 @@ public class PlayerMove : MonoBehaviour
     private bool sit = false;
     private BoxCollider _collider;
 
+    private int cast = 0;
+
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private int maxCast;
+    [SerializeField]
+    private GameObject stepSoundZone;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,12 +47,15 @@ public class PlayerMove : MonoBehaviour
                 transform.Translate(new Vector3(0, 0, speed) * Time.deltaTime);
                 _animator.SetBool("MoveForward", true);
                 _animator.SetBool("MoveBackward", false);
+                SpawnSound(10);
+                
             }
             else if (Input.GetKey(KeyCode.S))
             {
                 transform.Translate(new Vector3(0, 0, -speed * 0.5f) * Time.deltaTime);
                 _animator.SetBool("MoveBackward", true);
                 _animator.SetBool("MoveForward", false);
+                SpawnSound(5);
             }
             else
             {
@@ -71,5 +82,17 @@ public class PlayerMove : MonoBehaviour
     public bool GetSit()
     {
         return sit;
+    }
+
+    void SpawnSound(float radius)
+    {
+        cast++;
+        if (cast >= maxCast)
+        {
+            cast = 0;
+            GameObject stepSound = Instantiate(stepSoundZone);
+            stepSound.GetComponent<GrowZone>().SetMaxRange(radius);
+            stepSound.transform.position = new Vector3(transform.position.x, 0.1f, transform.position.z);
+        }
     }
 }

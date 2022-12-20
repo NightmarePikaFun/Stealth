@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8774104387052393624}
   - component: {fileID: 5220163631494433373}
   m_Layer: 0
-  m_Name: Lever
+  m_Name: LeverDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
