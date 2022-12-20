@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3367667538717782739}
   - component: {fileID: 3367667538718875613}
   - component: {fileID: 2339594280032166439}
+  - component: {fileID: 238308216806958645}
   m_Layer: 0
   m_Name: LeverWatchers
   m_TagString: Untagged
@@ -98,6 +99,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 3, z: 1}
   m_Center: {x: 0, y: 0, z: 0.5}
+--- !u!114 &238308216806958645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3367667538716681791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c2c175b0d6b9943b85a5c87ab78596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  watchers: []
 --- !u!1001 &3367667538502516916
 PrefabInstance:
   m_ObjectHideFlags: 0

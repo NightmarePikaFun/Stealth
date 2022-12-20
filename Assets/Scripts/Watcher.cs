@@ -10,6 +10,7 @@ public class Watcher : MonoBehaviour
     private GameObject zonePref;
 
     private GameObject observer;
+    private float growSpeed = 10.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,12 +23,19 @@ public class Watcher : MonoBehaviour
         
     }
 
+    public void SetGrowSpeed(float value)
+    {
+        growSpeed = value;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name);
         if (other.gameObject.tag == "Player" && CalcAlertZone(other.transform.position) && LeverActive())
         {
             Vector3 pos = new Vector3(transform.position.x, 0.05f, transform.position.z);
             GameObject zone = Instantiate(zonePref);
+            zone.GetComponent<GrowZone>().SetGrowSpeed(growSpeed);
             zone.transform.position = pos;
         }
     }
