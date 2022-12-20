@@ -6,11 +6,14 @@ public class Watcher : MonoBehaviour
 {
     [SerializeField]
     private int watchX, watchZ;
+    [SerializeField]
+    private GameObject zonePref;
 
+    private GameObject observer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        observer = GameObject.FindGameObjectWithTag("observer");
     }
 
     // Update is called once per frame
@@ -19,12 +22,29 @@ public class Watcher : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && CalcAlertZone(other.transform.position) && LeverActive())
+        {
+            Vector3 pos = new Vector3(transform.position.x, 0.05f, transform.position.z);
+            GameObject zone = Instantiate(zonePref);
+            zone.transform.position = pos;
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player" && CalcAlertZone(other.transform.position) && LeverActive())
         {
+            observer.GetComponent<Observer>().SeeYou(this.gameObject);
+        }
+    }
 
-            Debug.Log("Alert!");
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            observer.GetComponent<Observer>().NotSeeYou(this.gameObject);
         }
     }
 

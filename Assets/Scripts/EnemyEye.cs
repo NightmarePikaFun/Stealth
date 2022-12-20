@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyEye : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // Start is called before the first frame updateì 
     [SerializeField]
     private float speed;
 
@@ -12,19 +12,26 @@ public class EnemyEye : MonoBehaviour
     private Vector3[] route;
     [SerializeField]
     private int[] routeAngle;
+    [SerializeField]
+    private GameObject growZone;
 
+    private GameObject observer;
     private int routeNumber = 0;
-
     private bool moveNaprav = false; // false to end, true to start;
+    private bool seeZoneBool;
+
+    [SerializeField]
+    private int maxCast;
+
+    private int cast = 0;
 
     void Start()
     {
-        
+        observer = GameObject.FindGameObjectWithTag("observer");
     }
 
     void FixedUpdate()
     {
-
         if (CalcDistance(transform.position, route[routeNumber]) < 0.5f)
         {
             if (routeNumber + 1 != route.Length)
@@ -45,6 +52,8 @@ public class EnemyEye : MonoBehaviour
         }
     }
 
+    private float raycastDistanceToPlayer = 100000000;
+
     private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag == "Player")
@@ -58,9 +67,32 @@ public class EnemyEye : MonoBehaviour
                 Debug.DrawRay(pos, hit.point-pos, Color.red);
                 Vector3 a = hit.point;a.y = 0;
                 Vector3 b = target; b.y = 0;
-                if (Vector3.Distance(a, b) < 0.85)
-                    Debug.Log("I see you");
+                raycastDistanceToPlayer = Vector3.Distance(a, b);
+                if (raycastDistanceToPlayer < 0.85)
+                {
+                    cast++;
+                    observer.GetComponent<Observer>().SeeYou(this.gameObject);
+                    if(cast>=maxCast)
+                    {
+                        cast = 0;
+                        Vector3 tmpVec = new Vector3(transform.position.x,0.5f,transform.position.z);
+                        GameObject tmpZone = Instantiate(growZone);
+                        tmpZone.transform.position = tmpVec;
+                        tmpZone.GetComponent<VisionZone>().SetParent(this.gameObject);
+                    }
+                }
+                else
+                    observer.GetComponent<Observer>().NotSeeYou(this.gameObject);
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            raycastDistanceToPlayer = 1000000;
+            observer.GetComponent<Observer>().NotSeeYou(this.gameObject);
         }
     }
 
@@ -86,9 +118,13 @@ public class EnemyEye : MonoBehaviour
         }
         newAngle[0] = routeAngle[0];
         newAngle[1] = routeAngle[route.Length - 1];
-        //routeAngle[route.Length - 1] = newAngle[0];
-        //routeAngle[0] = newAngle[1];
         route = newRoute;
         routeNumber = 0;
+    }
+
+    public void SetSeeZone()
+    {
+        if(raycastDistanceToPlayer<0.85)
+            observer.GetComponent<Observer>().SpawnGhostTarget();
     }
 }

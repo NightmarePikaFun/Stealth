@@ -33,8 +33,15 @@ public class DoorOpenScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        canActivate = true;
+        if (other.gameObject.tag == "Player")
+            canActivate = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+            canActivate = false;
     }
 }

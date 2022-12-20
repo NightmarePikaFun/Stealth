@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1107455252744494391}
   m_Layer: 2
   m_Name: Watcher
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   watchX: 1
   watchZ: 1
+  zonePref: {fileID: 2237634023720918288, guid: 6552d6f6ee68eef42a39950ed94e855e, type: 3}
 --- !u!1001 &6064500717452816281
 PrefabInstance:
   m_ObjectHideFlags: 0
