@@ -17,6 +17,18 @@ public class Observer : MonoBehaviour
     private bool[] canSee;
     private float[] listen;
 
+    private bool canPlayerMove = true;
+
+    public bool CanPlayerMove()
+    {
+        return canPlayerMove;
+    }
+
+    public void PlayerMoveSet(bool value)
+    {
+        canPlayerMove = value;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,11 +106,23 @@ public class Observer : MonoBehaviour
 
     public void SpawnGhostTarget()
     {
-        Debug.Log("I kill you!");
+        Debug.Log(GameObject.FindGameObjectWithTag("Killer") == null);
+        if (GameObject.FindGameObjectWithTag("Killer") == null)
+        {
+            GameObject tmp = Instantiate(deadEyeGhost);
+            tmp.transform.position = new Vector3(0, 10, 0);
+            Debug.Log("I kill you!");
+        }
     }
 
     public void SpawnGhostListen(Vector3 pos)
     {
-        Debug.Log("I hear you!");
+        if (GameObject.FindGameObjectWithTag("Listener") == null)
+        {
+            GameObject tmp = Instantiate(listenGhost);
+            tmp.transform.position = new Vector3(0, 10, 0);
+            listenGhost.GetComponent<GhsotListener>().SetPos(pos);
+            Debug.Log("I hear you!");
+        }
     }
 }

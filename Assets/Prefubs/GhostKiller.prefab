@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7274328338266702152}
   m_Layer: 0
   m_Name: GhostKiller
-  m_TagString: Untagged
+  m_TagString: Killer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3d3e588d9640fd43b9521f0f7d0957e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5
 --- !u!1001 &8917637542081221689
 PrefabInstance:
   m_ObjectHideFlags: 0

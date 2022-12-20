@@ -13,12 +13,15 @@ public class Barrel : MonoBehaviour
     private CapsuleCollider _capsule;
     [SerializeField]
     private GameObject barrelModel;
+
+    private GameObject observer;
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<Renderer>().material.color = Color.gray;
         _capsule = GetComponent<CapsuleCollider>();
         player = GameObject.FindGameObjectWithTag("Player");
+        observer = GameObject.FindGameObjectWithTag("observer");
     }
 
     // Update is called once per frame
@@ -37,6 +40,7 @@ public class Barrel : MonoBehaviour
                 player.tag = "Null";
                 player.transform.position = barrelModel.transform.position;
                 GetComponent<Renderer>().material.color = Color.gray;
+                observer.GetComponent<Observer>().PlayerMoveSet(false);
             }
             else
             {
@@ -45,6 +49,7 @@ public class Barrel : MonoBehaviour
                 player.tag = "Player";
                 _capsule.isTrigger = false;
                 GetComponent<Renderer>().material.color = Color.red;
+                observer.GetComponent<Observer>().PlayerMoveSet(true);
             }
         }
         

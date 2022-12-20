@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     private Animator _animator;
     private bool sit = false;
     private BoxCollider _collider;
+    private GameObject observer;
 
     private int cast = 0;
 
@@ -23,6 +24,7 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        observer = GameObject.FindGameObjectWithTag("observer");
         _rigidbody = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _collider = GetComponent<BoxCollider>();
@@ -31,7 +33,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.X))
+        if (Input.GetKey(KeyCode.X) || Input.GetKey(KeyCode.LeftControl))
         {
             sit = true;
             _collider.center = new Vector3(0, 0.5f, 0);
@@ -42,7 +44,7 @@ public class PlayerMove : MonoBehaviour
             _collider.center = new Vector3(0, 1f, 0);
             _collider.size = new Vector3(1, 1.9f, 1);
             sit = false;
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetKey(KeyCode.W) && observer.GetComponent<Observer>().CanPlayerMove())
             {
                 transform.Translate(new Vector3(0, 0, speed) * Time.deltaTime);
                 _animator.SetBool("MoveForward", true);
@@ -50,7 +52,7 @@ public class PlayerMove : MonoBehaviour
                 SpawnSound(10);
                 
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKey(KeyCode.S) && observer.GetComponent<Observer>().CanPlayerMove())
             {
                 transform.Translate(new Vector3(0, 0, -speed * 0.5f) * Time.deltaTime);
                 _animator.SetBool("MoveBackward", true);

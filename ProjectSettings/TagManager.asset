@@ -8,6 +8,8 @@ TagManager:
   - observer
   - Enemy
   - Null
+  - Killer
+  - Listener
   layers:
   - Default
   - TransparentFX
